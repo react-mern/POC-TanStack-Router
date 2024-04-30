@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.navbar {
+  height: 4rem;
+}
+
+.main-container {
+  height: calc(100vh - 4rem);
+}
