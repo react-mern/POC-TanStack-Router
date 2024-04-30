@@ -13,25 +13,28 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as TempRouteRouteImport } from './routes/tempRoute/route'
 import { Route as LoginRouteImport } from './routes/login/route'
 import { Route as AuthRouteImport } from './routes/_auth/route'
 import { Route as UsersIndexImport } from './routes/users/index'
 import { Route as ProductsIndexImport } from './routes/products/index'
+import { Route as NavigationBlockingIndexImport } from './routes/navigationBlocking/index'
 import { Route as ProductsProductIdImport } from './routes/products/$productId'
 import { Route as AuthProfileIndexImport } from './routes/_auth/profile/index'
 import { Route as ProductsProductIdEditImport } from './routes/products_/$productId/edit'
 
 // Create Virtual Routes
 
+const TempRouteRouteLazyImport = createFileRoute('/tempRoute')()
 const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
 
-const TempRouteRouteRoute = TempRouteRouteImport.update({
+const TempRouteRouteLazyRoute = TempRouteRouteLazyImport.update({
   path: '/tempRoute',
   getParentRoute: () => rootRoute,
-} as any)
+} as any).lazy(() =>
+  import('./routes/tempRoute/route.lazy').then((d) => d.Route),
+)
 
 const LoginRouteRoute = LoginRouteImport.update({
   path: '/login',
@@ -55,6 +58,11 @@ const UsersIndexRoute = UsersIndexImport.update({
 
 const ProductsIndexRoute = ProductsIndexImport.update({
   path: '/products/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const NavigationBlockingIndexRoute = NavigationBlockingIndexImport.update({
+  path: '/navigationBlocking/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -90,11 +98,15 @@ declare module '@tanstack/react-router' {
       parentRoute: typeof rootRoute
     }
     '/tempRoute': {
-      preLoaderRoute: typeof TempRouteRouteImport
+      preLoaderRoute: typeof TempRouteRouteLazyImport
       parentRoute: typeof rootRoute
     }
     '/products/$productId': {
       preLoaderRoute: typeof ProductsProductIdImport
+      parentRoute: typeof rootRoute
+    }
+    '/navigationBlocking/': {
+      preLoaderRoute: typeof NavigationBlockingIndexImport
       parentRoute: typeof rootRoute
     }
     '/products/': {
@@ -122,8 +134,9 @@ export const routeTree = rootRoute.addChildren([
   IndexLazyRoute,
   AuthRouteRoute.addChildren([AuthProfileIndexRoute]),
   LoginRouteRoute,
-  TempRouteRouteRoute,
+  TempRouteRouteLazyRoute,
   ProductsProductIdRoute,
+  NavigationBlockingIndexRoute,
   ProductsIndexRoute,
   UsersIndexRoute,
   ProductsProductIdEditRoute,

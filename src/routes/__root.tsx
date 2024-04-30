@@ -1,6 +1,6 @@
 import { TanStackRouterDevtools } from '@tanstack/router-devtools';
 import Navbar from '../components/Navbar';
-import { Outlet, createRootRouteWithContext } from '@tanstack/react-router';
+import { Outlet, ScrollRestoration, createRootRouteWithContext } from '@tanstack/react-router';
 // import { createRootRoute } from '@tanstack/react-router';
 import { AuthContext } from '../hooks/useAuth';
 
@@ -24,13 +24,24 @@ type RouterContext = {
 
 
 export const Route = createRootRouteWithContext<RouterContext>()({
-    component: () => (
+
+    component: () => {
+    // const router = useRouter()
+
+    // const breadcrumbs = router.state.matches.map((match) => {
+    //   const { pathname } = match
+    //   return pathname
+    // })
+    // console.log(breadcrumbs)
+
+    return (
         <>
+         {/* <ScrollRestoration /> */}
             <Navbar />
             <main className="main-container">
                 <Outlet />
             </main>
             <TanStackRouterDevtools position="bottom-right" />
         </>
-    ),
+    )}
 });

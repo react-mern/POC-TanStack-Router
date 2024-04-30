@@ -1,4 +1,4 @@
-import { ErrorComponent, createFileRoute } from '@tanstack/react-router';
+import { ErrorComponent, Link, createFileRoute } from '@tanstack/react-router';
 import { fetchProductById } from '../../services/products';
 
 export const Route = createFileRoute('/products/$productId')({
@@ -24,6 +24,7 @@ function Product() {
               </h1>
               <p className="text-gray-600 mb-4">${product.price}</p>
               <p className="text-gray-700">{product.description}</p>
+              <Link to="/products/$productId/edit" mask={{to:"/products/", unmaskOnReload:true}} params={{productId:product.id}}>Edit</Link>
             </div>
             <div className="p-6">
               <img

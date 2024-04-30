@@ -1,4 +1,4 @@
-import { ErrorComponent, RouterProvider, createRouter } from '@tanstack/react-router'
+import { ErrorComponent, Link, RouterProvider, createRouter } from '@tanstack/react-router'
 
 // Import the generated route tree
 import { routeTree } from './routeTree.gen'
@@ -11,6 +11,14 @@ const router = createRouter({
     defaultPendingComponent: () => <Spinner />,
     defaultErrorComponent: ({ error }) => <ErrorComponent error={error} />,
     context: { auth: undefined! },
+    defaultNotFoundComponent:() => {
+    return (
+      <div className='text-center'>
+        <p className='text-2xl font-semibold'>Not found!</p>
+        <Link to="/" className='text-blue-500 '>Go home</Link>
+      </div>
+    )
+  },
 })
 
 // Register the router instance for type safety

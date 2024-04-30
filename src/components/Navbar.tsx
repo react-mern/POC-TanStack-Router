@@ -6,7 +6,7 @@ const Navbar = () => {
     const userName = getUsername();
 
     return (
-        <nav className="bg-gray-700 text-white  navbar">
+        <nav className="bg-gray-700 fixed top-0 w-full text-white  navbar">
             <div className="container mx-auto my-auto h-full flex justify-between items-center">
                 {/* Logo */}
                 <a href="#" className=" text-2xl font-bold">
@@ -22,6 +22,7 @@ const Navbar = () => {
                             ['/products', 'Products'],
                             ['/profile', 'Profile'],
                             ['/users', 'Users'],
+                            ['/navigationBlocking',"Payment"]
                         ] as const
                     ).map(([to, label]) => {
                         return (

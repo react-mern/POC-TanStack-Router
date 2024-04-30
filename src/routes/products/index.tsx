@@ -15,8 +15,11 @@ export const Route = createFileRoute('/products/')({
 });
 
 function Products() {
-  const products = Route.useLoaderData();
-  const { title } = Route.useSearch()
+  const allProducts = Route.useLoaderData();
+
+  const products=allProducts.filter((product:Product)=>product.images.length>2)
+  
+  const { title } = Route.useSearch();
 
   const navigate = useNavigate({ from: Route.fullPath })
 
@@ -34,7 +37,7 @@ function Products() {
         </div>
 
       </div>
-      <RouteApiExample />
+      {/* <RouteApiExample /> */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
         {products?.map((product: Product) => (
           <Link

@@ -3,7 +3,7 @@ import { notFound } from '@tanstack/react-router';
 // Function to fetch all products with optional search parameters
 export async function fetchProducts(title = '') {
   const response = await fetch(
-    `https://api.escuelajs.co/api/v1/products?offset=0&limit=10&title=${title}`
+    `https://api.escuelajs.co/api/v1/products?offset=0&limit=20&title=${title}`
   );
   if (!response.ok) {
     throw new Error('Failed to fetch products');
