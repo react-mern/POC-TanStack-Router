@@ -6,9 +6,11 @@ export const Route = createFileRoute('/_auth/profile/')({
 })
 
 function Profile() {
+  const { username } = Route.useRouteContext();
+
   const navigate = useNavigate();
 
-  const { getUsername, signOut } = useAuth();
+  const { signOut } = useAuth();
 
   const handleSignOut = () => {
     signOut();
@@ -21,7 +23,7 @@ function Profile() {
         <h1 className="text-3xl font-bold mb-6">👤 Profile</h1>
         <div className="flex items-center mb-4">
           <span className="text-2xl mr-2">👋</span>
-          <p className="text-xl text-gray-800 font-bold">{getUsername()}</p>
+          <p className="text-xl text-gray-800 font-bold">{username}</p>
         </div>
         <p className="text-gray-600 mb-4">Welcome back to your profile! 🎉</p>
         <p className="text-gray-600">Feel free to explore and update your information. ✨</p>

@@ -7,22 +7,22 @@ export const Route = createFileRoute('/users/')({
   component: UserList,
   loader: async () => {
     // Fetch some slower data, but do not await it
-    const slowUsers: Promise<User[]> = fetchSlowUsers()
+    const slowUsersData: Promise<User[]> = fetchSlowUsers()
 
     // Fetch and await some data that resolves quickly
-    const fastUsers = await fetchUsers()
+    const fastUsersData = await fetchUsers()
 
     return {
-      fastUsers,
+      fastUsersData,
       // Wrap the slow promise in `defer()`
-      deferredSlowUsers: defer(slowUsers),
+      deferredSlowUsersData: defer(slowUsersData),
     }
   }
 })
 
 function UserList() {
 
-  const { deferredSlowUsers, fastUsers: users } = Route.useLoaderData()
+  const { deferredSlowUsersData, fastUsersData: users } = Route.useLoaderData()
 
   return (
     <div className="container mx-auto py-10">
@@ -33,7 +33,7 @@ function UserList() {
         ))}
       </div>
       <Suspense fallback={<Spinner />}>
-        <Await promise={deferredSlowUsers}>
+        <Await promise={deferredSlowUsersData}>
           {(defferedUsers: User[]) => (
             <div className="grid mt-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
               {defferedUsers.map((user: User) => (

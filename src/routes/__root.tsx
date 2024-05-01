@@ -26,22 +26,23 @@ type RouterContext = {
 export const Route = createRootRouteWithContext<RouterContext>()({
 
     component: () => {
-    // const router = useRouter()
+        // const router = useRouter()
 
-    // const breadcrumbs = router.state.matches.map((match) => {
-    //   const { pathname } = match
-    //   return pathname
-    // })
-    // console.log(breadcrumbs)
+        // const breadcrumbs = router.state.matches.map((match) => {
+        //   const { pathname } = match
+        //   return pathname
+        // })
+        // console.log(breadcrumbs)
 
-    return (
-        <>
-         {/* <ScrollRestoration /> */}
-            <Navbar />
-            <main className="main-container">
-                <Outlet />
-            </main>
-            <TanStackRouterDevtools position="bottom-right" />
-        </>
-    )}
+        return (
+            <>
+                <ScrollRestoration />
+                <Navbar />
+                <main className="main-container">
+                    <Outlet />
+                </main>
+                <TanStackRouterDevtools position="bottom-right" />
+            </>
+        )
+    }
 });

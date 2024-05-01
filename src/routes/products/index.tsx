@@ -11,14 +11,15 @@ export const Route = createFileRoute('/products/')({
   loaderDeps: ({ search }) => ({ title: search.title }),
   loader: async ({ deps }) => fetchProducts(deps.title),
   component: Products,
-  validateSearch: productSearchSchema
+  validateSearch: productSearchSchema,
 });
 
 function Products() {
   const allProducts = Route.useLoaderData();
 
-  const products=allProducts.filter((product:Product)=>product.images.length>2)
-  
+  // render products which has image 
+  const products = allProducts.filter((product: Product) => product.images.length > 2)
+
   const { title } = Route.useSearch();
 
   const navigate = useNavigate({ from: Route.fullPath })
@@ -33,11 +34,9 @@ function Products() {
         <h1 className="text-3xl font-bold mb-6">Our Products</h1>
         <div>
           <input type="text" placeholder="Search" value={title} onChange={handleSearchChange} className="px-3 py-1 bg-gray-300 rounded-md focus:outline-none focus:bg-gray-200" />
-          {/* <button type="submit" className="ml-2 px-3 py-1 bg-gray-700 text-white rounded-md hover:bg-gray-600 focus:outline-none">Search</button> */}
         </div>
-
       </div>
-      {/* <RouteApiExample /> */}
+      <RouteApiExample />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
         {products?.map((product: Product) => (
           <Link

@@ -1,4 +1,4 @@
-import { createFileRoute, redirect, useRouter, useRouterState } from '@tanstack/react-router';
+import { createFileRoute, redirect, useRouter } from '@tanstack/react-router';
 import { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { z } from 'zod';
@@ -26,7 +26,7 @@ function Login() {
   const handleLogin = () => {
     signIn(username);
     router.invalidate();
-    router.history.push(search?.redirect ?? "/login")
+    router.history.push(search?.redirect ?? "/profile")
   };
 
   return (
