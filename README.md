@@ -4,11 +4,11 @@ This is a demo project showcasing the usage of TanStack Router for client-side r
 
 ## Table of Contents 📚
 
-- [Introduction](#what-is-tanstack-router)
-- [Getting Started](#getting-started)
-  - [Installation](#installation)
-  - [Run the Project](#run-the-project)
-- [Project Structure](#folder-structure)
+- [Introduction](#what-is-tanstack-router-)
+- [Getting Started](#getting-started-)
+  - [Installation](#installation-)
+  - [Run the Project](#run-the-project-)
+- [Project Structure](#folder-structure-)
 
 ## What is TanStack Router? 🧐
 
@@ -29,7 +29,7 @@ A fully type-safe React router with built-in data fetching, stale-while revalida
 - Search param middleware
 - Route matching/loading middleware
 
-for more info check [TanStack Router documentation]("https://tanstack.com/router/latest")
+for more info check [TanStack Router documentation](https://tanstack.com/router/latest)
 
 [Demo URL](https://tanstack-router.netlify.app/)
 
