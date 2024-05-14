@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 
+// non-nested route
 export const Route = createFileRoute('/products/$productId/edit')({
   component: EditProduct
 })

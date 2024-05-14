@@ -1,9 +1,12 @@
 import { ErrorComponent, Link, createFileRoute } from '@tanstack/react-router';
 import { fetchProductById } from '../../services/products';
 
+// dynamic route
 export const Route = createFileRoute('/products/$productId')({
   component: Product,
+  // get dynamic params in loader to fetch data before page load.
   loader: async ({ params: { productId } }) => fetchProductById(productId),
+  // custom not found page, can be shown by throwing notFound() error.
   notFoundComponent: () => {
     return <p className='text-center text-3xl text-red-700 my-5'>Product not found</p>;
   },
@@ -11,6 +14,7 @@ export const Route = createFileRoute('/products/$productId')({
 });
 
 function Product() {
+  // data fetched by loader 
   const product = Route.useLoaderData();
 
   return (
@@ -24,7 +28,8 @@ function Product() {
               </h1>
               <p className="text-gray-600 mb-4">${product.price}</p>
               <p className="text-gray-700">{product.description}</p>
-              <Link to="/products/$productId/edit" mask={{to:"/products/", unmaskOnReload:true}} params={{productId:product.id}}>Edit</Link>
+              {/* mask route to "/products/" and it won't remember the masked route because unmaskOnReload is ture. */}
+              <Link to="/products/$productId/edit" mask={{ to: "/products/", unmaskOnReload: true }} params={{ productId: product.id }}>Edit</Link>
             </div>
             <div className="p-6">
               <img

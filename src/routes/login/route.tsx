@@ -6,11 +6,13 @@ import { z } from 'zod';
 export const Route = createFileRoute('/login')({
   beforeLoad: ({ context }) => {
     if (context.auth.isLogged()) {
+      // redirect to profile if already logged in 
       throw redirect({
         to: '/profile'
       });
     }
   },
+  // validate search params before using it 
   validateSearch: z.object({
     redirect: z.string().optional(),
   }),
@@ -25,7 +27,9 @@ function Login() {
 
   const handleLogin = () => {
     signIn(username);
+    // The .invalidate() method in the router framework is used to forcibly invalidate all route matches by triggering their beforeLoad and load functions to be called again. This is useful when you need to forcefully reload a route match
     router.invalidate();
+    //here naviagte API can also be used
     router.history.push(search?.redirect ?? "/profile")
   };
 

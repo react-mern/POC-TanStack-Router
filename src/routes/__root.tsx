@@ -22,7 +22,7 @@ type RouterContext = {
     auth: AuthContext;
 };
 
-
+// create root layout with context 
 export const Route = createRootRouteWithContext<RouterContext>()({
 
     component: () => {
@@ -36,11 +36,14 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 
         return (
             <>
+                {/* Scroll restoration is the process of restoring the scroll position of a page when the user navigates back to it. */}
                 <ScrollRestoration />
                 <Navbar />
                 <main className="main-container">
+                    {/* child routes will be rendered here*/}
                     <Outlet />
                 </main>
+                {/* These devtools can help you visualize and debug the inner workings of TanStack Router, making your development process smoother. */}
                 <TanStackRouterDevtools position="bottom-right" />
             </>
         )

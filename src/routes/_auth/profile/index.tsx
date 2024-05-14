@@ -1,11 +1,21 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { useAuth } from '../../../hooks/useAuth';
 
+//_auth is layout route, Pathless/Layout routes can be used to wrap child routes with additional components and logic, without requiring a matching path in the URL
 export const Route = createFileRoute('/_auth/profile/')({
+  // staleTime to control how long data is considered fresh
+  // Consider the route's data fresh for 10 seconds
+  //  staleTime: Infinity, to turn off SWR
+  staleTime: 10_000,
+  //  // Do not cache this route's data after it's unloaded
+  // gcTime: 0,
+  // // Only reload the route when the user navigates to it or when deps change
+  // shouldReload: false,
   component: Profile
 })
 
 function Profile() {
+  //get context from parent route
   const { username } = Route.useRouteContext();
 
   const navigate = useNavigate();
@@ -14,6 +24,7 @@ function Profile() {
 
   const handleSignOut = () => {
     signOut();
+    // navigate to "/" after signout
     navigate({ to: "/" })
   }
 

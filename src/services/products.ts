@@ -17,6 +17,7 @@ export async function fetchProducts(title = '') {
 export async function fetchProductById(productId: string) {
   const url = `https://api.escuelajs.co/api/v1/products/${productId}`;
   const response = await fetch(url);
+  // throw notFound error from tantStack router
   if (response.status == 400) {
     throw notFound();
   }

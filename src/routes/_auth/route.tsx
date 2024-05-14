@@ -1,7 +1,6 @@
 // import { createFileRoute, redirect } from '@tanstack/react-router'
 // import { isAuthenticated } from '../../utils/auth'
 
-
 // export const Route = createFileRoute('/_auth')({
 //   beforeLoad: () => {
 //     if (!isAuthenticated()) {
@@ -19,6 +18,7 @@
 
 
 
+// hooks are not directly accessible so we can pass context in router provider and it will be provided in params of beforeload
 import { createFileRoute, redirect } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_auth')({
@@ -31,6 +31,7 @@ export const Route = createFileRoute('/_auth')({
         },
       })
     }
+    // pass parent context to child route
     return {
       username: context.auth.getUsername()
     }

@@ -14,7 +14,7 @@ export const Route = createFileRoute('/users/')({
 
     return {
       fastUsersData,
-      // Wrap the slow promise in `defer()`
+      // To defer slow or non-critical data, wrap an unawaited/unresolved promise in the defer function
       deferredSlowUsersData: defer(slowUsersData),
     }
   }
@@ -33,6 +33,7 @@ function UserList() {
         ))}
       </div>
       <Suspense fallback={<Spinner />}>
+        {/* deferred promises can be resolved and utilized using the Await component */}
         <Await promise={deferredSlowUsersData}>
           {(defferedUsers: User[]) => (
             <div className="grid mt-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">

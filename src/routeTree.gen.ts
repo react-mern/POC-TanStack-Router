@@ -24,16 +24,16 @@ import { Route as ProductsProductIdEditImport } from './routes/products_/$produc
 
 // Create Virtual Routes
 
-const TempRouteRouteLazyImport = createFileRoute('/tempRoute')()
+const LazyRouteRouteLazyImport = createFileRoute('/lazyRoute')()
 const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
 
-const TempRouteRouteLazyRoute = TempRouteRouteLazyImport.update({
-  path: '/tempRoute',
+const LazyRouteRouteLazyRoute = LazyRouteRouteLazyImport.update({
+  path: '/lazyRoute',
   getParentRoute: () => rootRoute,
 } as any).lazy(() =>
-  import('./routes/tempRoute/route.lazy').then((d) => d.Route),
+  import('./routes/lazyRoute/route.lazy').then((d) => d.Route),
 )
 
 const LoginRouteRoute = LoginRouteImport.update({
@@ -97,8 +97,8 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRoute
     }
-    '/tempRoute': {
-      preLoaderRoute: typeof TempRouteRouteLazyImport
+    '/lazyRoute': {
+      preLoaderRoute: typeof LazyRouteRouteLazyImport
       parentRoute: typeof rootRoute
     }
     '/products/$productId': {
@@ -134,7 +134,7 @@ export const routeTree = rootRoute.addChildren([
   IndexLazyRoute,
   AuthRouteRoute.addChildren([AuthProfileIndexRoute]),
   LoginRouteRoute,
-  TempRouteRouteLazyRoute,
+  LazyRouteRouteLazyRoute,
   ProductsProductIdRoute,
   NavigationBlockingIndexRoute,
   ProductsIndexRoute,

@@ -7,22 +7,20 @@ const Navbar = () => {
 
     return (
         <nav className="bg-gray-700 fixed top-0 w-full text-white  navbar">
-            <div className="container mx-auto my-auto h-full flex justify-between items-center">
-                {/* Logo */}
+            <div className="px-5 mx-auto my-auto h-full flex justify-between items-center">
                 <a href="#" className=" text-2xl font-bold">
                     MyApp
                 </a>
-
                 {/* Navigation Links */}
 
-                <div className="flex items-cente">
+                <div className="flex">
                     {(
                         [
                             ['/', 'Home'],
                             ['/products', 'Products'],
                             ['/profile', 'Profile'],
                             ['/users', 'Users'],
-                            ['/navigationBlocking',"Payment"]
+                            ['/navigationBlocking', "Payment"]
                         ] as const
                     ).map(([to, label]) => {
                         return (
@@ -34,9 +32,9 @@ const Navbar = () => {
                                         // exact:true
                                         // If the route points to the root of it's parent,
                                         // make sure it's only active if it's exact
-                                        // exact: to === '.',
                                     }
                                 }
+                                //enable preloading
                                 preload="intent"
                                 className={`block py-2 px-3`}
                                 // Make "active" links bold
@@ -53,6 +51,7 @@ const Navbar = () => {
                     </span>
                 ) : (
                     <Link to="/login" activeProps={{ className: `font-bold` }}>
+                        {/* got isActive prop of active link in function params */}
                         {({ isActive }) => <span>Login {isActive && "🧑‍🦱"}</span>}
                     </Link>
                 )}
